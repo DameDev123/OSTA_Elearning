@@ -4,55 +4,131 @@
 
 /*
  * ============================================================
- * OSTA Theme Tokens (Light / Dark)
+ * OSTA THEME TOKENS (Light / Dark)
  * ============================================================
  * Single source of truth for every color used by the semantic
- * Tailwind tokens in tailwind.config.js (primary, accent, gold,
- * success, danger, info, ink, surface, border). Add a new theme
- * in the future by adding one more attribute-selector block here
- * — no component changes required.
+ * Tailwind tokens in tailwind.config.js (primary, secondary,
+ * accent, gold, success, danger, warning, info, ink, surface,
+ * sidebar, structure, border, focus). Add a new theme in the
+ * future by adding one more attribute-selector block here — no
+ * component changes required.
+ *
+ * All values are "R G B" space-separated so Tailwind can apply
+ * opacity via `rgb(var(--x) / <alpha-value>)`.
+ * ============================================================
  */
+
 :root {
+  /* ----------------------------------------------------------
+     BASE SURFACES
+  ---------------------------------------------------------- */
   --color-bg: 248 250 252;
   /* slate-50  — page background */
+  --color-bg-canvas: 248 250 252;
+  /* slate-50  — same as page bg by default */
   --color-surface: 255 255 255;
   /* white     — card/panel background */
   --color-surface-muted: 241 245 249;
   /* slate-100 — recessed background */
   --color-surface-elevated: 255 255 255;
   /* white     — modals/dropdowns/popovers */
+  --color-surface-overlay: 255 255 255;
+  /* white     — dropdown/menu surface */
+  --color-surface-hover: 248 250 252;
+  /* slate-50  — subtle hover wash */
+  --color-surface-active: 241 245 249;
+  /* slate-100 — pressed/active wash */
+
   --color-border: 226 232 240;
   /* slate-200 */
   --color-border-muted: 241 245 249;
   /* slate-100 */
+  --color-border-strong: 203 213 225;
+  /* slate-300 */
+  --color-border-focus: 29 78 216;
+  /* blue-700, matches --color-primary */
 
+  /* ----------------------------------------------------------
+     TEXT / INK
+  ---------------------------------------------------------- */
   --color-text: 15 23 42;
   /* slate-900 — primary text */
   --color-text-soft: 71 85 105;
   /* slate-600 — secondary text */
+  --color-text-muted: 100 116 139;
+  /* slate-500 — tertiary/meta text */
   --color-text-faint: 148 163 184;
-  /* slate-400 — muted text/placeholders */
+  /* slate-400 — placeholders */
+  --color-text-inverse: 255 255 255;
+  /* text on dark/solid brand backgrounds */
 
+  /* ----------------------------------------------------------
+     BRAND — PRIMARY (blue)
+     dark / darker are FIXED across themes on purpose — they
+     back solid brand surfaces (e.g. the homepage hero gradient)
+     that always pair with white text, in light or dark mode.
+  ---------------------------------------------------------- */
   --color-primary: 29 78 216;
   /* blue-700 */
   --color-primary-hover: 30 64 175;
   /* blue-800 */
   --color-primary-light: 239 246 255;
   /* blue-50  — subtle active/hover bg */
+  --color-primary-lighter: 219 234 254;
+  /* blue-100 */
+  --color-primary-dark: 30 64 175;
+  /* blue-800 — fixed, do not theme-flip */
+  --color-primary-darker: 23 37 84;
+  /* blue-950 — fixed, do not theme-flip */
+  --color-primary-border: 191 219 254;
+  /* blue-200 */
+  --color-primary-foreground: 255 255 255;
 
+  /* ----------------------------------------------------------
+     SECONDARY (neutral slate — secondary buttons/badges)
+  ---------------------------------------------------------- */
+  --color-secondary: 100 116 139;
+  /* slate-500 */
+  --color-secondary-hover: 71 85 105;
+  /* slate-600 */
+  --color-secondary-light: 241 245 249;
+  /* slate-100 */
+  --color-secondary-dark: 51 65 85;
+  /* slate-700 */
+  --color-secondary-foreground: 255 255 255;
+
+  /* ----------------------------------------------------------
+     ACCENT / GOLD (amber — highlights, used with restraint)
+  ---------------------------------------------------------- */
   --color-accent: 245 158 11;
   /* amber-500 */
   --color-accent-hover: 217 119 6;
   /* amber-600 */
   --color-accent-light: 254 243 199;
   /* amber-100 */
+  --color-accent-dark: 180 83 9;
+  /* amber-700 */
+  --color-accent-foreground: 255 255 255;
 
+  --color-gold: 245 158 11;
+  /* amber-500 (kept for components using the 'gold' token) */
+  --color-gold-light: 254 243 199;
+  /* amber-100 */
+  --color-gold-dark: 180 83 9;
+  /* amber-700 */
+
+  /* ----------------------------------------------------------
+     STATUS COLORS
+  ---------------------------------------------------------- */
   --color-success: 16 185 129;
   /* emerald-500 */
   --color-success-hover: 5 150 105;
   /* emerald-600 */
   --color-success-light: 209 250 229;
   /* emerald-100 */
+  --color-success-dark: 4 120 87;
+  /* emerald-700 */
+  --color-success-foreground: 255 255 255;
 
   --color-danger: 220 38 38;
   /* red-600 */
@@ -60,6 +136,19 @@
   /* red-700 */
   --color-danger-light: 254 226 226;
   /* red-100 */
+  --color-danger-dark: 153 27 27;
+  /* red-800 */
+  --color-danger-foreground: 255 255 255;
+
+  --color-warning: 245 158 11;
+  /* amber-500 */
+  --color-warning-hover: 217 119 6;
+  /* amber-600 */
+  --color-warning-light: 254 243 199;
+  /* amber-100 */
+  --color-warning-dark: 180 83 9;
+  /* amber-700 */
+  --color-warning-foreground: 255 255 255;
 
   --color-info: 2 132 199;
   /* sky-600 */
@@ -67,10 +156,63 @@
   /* sky-700 */
   --color-info-light: 224 242 254;
   /* sky-100 */
+  --color-info-dark: 7 89 133;
+  /* sky-800 */
+  --color-info-foreground: 255 255 255;
+
+  /* ----------------------------------------------------------
+     SIDEBAR
+     Light mode reads as a clean white panel, subtly distinct
+     from the slate-50 page background behind it.
+  ---------------------------------------------------------- */
+  --color-sidebar: 255 255 255;
+  /* white */
+  --color-sidebar-surface: 248 250 252;
+  /* slate-50 */
+  --color-sidebar-hover: 241 245 249;
+  /* slate-100 */
+  --color-sidebar-active: 239 246 255;
+  /* blue-50, matches --color-primary-light */
+  --color-sidebar-border: 226 232 240;
+  /* slate-200 */
+  --color-sidebar-text: 15 23 42;
+  /* slate-900, matches --color-text */
+  --color-sidebar-text-muted: 100 116 139;
+  /* slate-500 */
+
+  /* ----------------------------------------------------------
+     STRUCTURE
+     Fixed dark structural chrome (used sparingly — e.g. a
+     forced-dark shell) — stays dark in both themes.
+  ---------------------------------------------------------- */
+  --color-structure: 15 23 42;
+  /* slate-900 */
+  --color-structure-sidebar: 11 15 25;
+  /* deep near-black sidebar */
+  --color-structure-surface: 30 41 59;
+  /* slate-800 */
+  --color-structure-border: 51 65 85;
+  /* slate-700 */
+
+  /* ----------------------------------------------------------
+     INTERACTION
+  ---------------------------------------------------------- */
+  --color-focus: 29 78 216;
+  /* blue-700, matches --color-primary */
+  --color-ring: 29 78 216;
+  /* blue-700 */
 }
 
 html.dark {
+  /* ----------------------------------------------------------
+     BASE SURFACES
+     A soft layered scale (bg < surface < muted < elevated) so
+     cards and modals visibly "lift" off the page, the way
+     modern dark dashboards (Linear, Vercel, GitHub) do it.
+  ---------------------------------------------------------- */
   --color-bg: 2 6 23;
+  /* slate-950 */
+  --color-bg-canvas: 2 6 23;
   /* slate-950 */
   --color-surface: 15 23 42;
   /* slate-900 */
@@ -78,40 +220,104 @@ html.dark {
   /* slate-800 */
   --color-surface-elevated: 30 41 59;
   /* slate-800, lifted further by border/shadow */
+  --color-surface-overlay: 30 41 59;
+  /* slate-800 */
+  --color-surface-hover: 30 41 59;
+  /* slate-800 */
+  --color-surface-active: 51 65 85;
+  /* slate-700 */
+
   --color-border: 51 65 85;
   /* slate-700 */
   --color-border-muted: 30 41 59;
   /* slate-800 */
+  --color-border-strong: 71 85 105;
+  /* slate-600 */
+  --color-border-focus: 59 130 246;
+  /* blue-500, matches --color-primary */
 
+  /* ----------------------------------------------------------
+     TEXT / INK
+  ---------------------------------------------------------- */
   --color-text: 248 250 252;
   /* slate-50 */
   --color-text-soft: 203 213 225;
   /* slate-300 */
+  --color-text-muted: 148 163 184;
+  /* slate-400 */
   --color-text-faint: 148 163 184;
   /* slate-400 — unchanged, still reads fine on dark */
+  --color-text-inverse: 15 23 42;
+  /* slate-900 */
 
-  /* Brighter/lighter shades on dark surfaces so contrast ratios hold up
-     (a blue-700 that reads fine on white gets muddy on slate-900). */
+  /* ----------------------------------------------------------
+     BRAND — PRIMARY (blue)
+     Brighter on dark surfaces so contrast holds up (a blue-700
+     that reads fine on white gets muddy on slate-900) — EXCEPT
+     dark/darker, which stay fixed navy on purpose (see :root).
+  ---------------------------------------------------------- */
   --color-primary: 59 130 246;
   /* blue-500 */
   --color-primary-hover: 96 165 250;
   /* blue-400 */
   --color-primary-light: 30 41 59;
   /* dark-surface tint instead of pale blue-50 */
+  --color-primary-lighter: 30 58 138;
+  /* blue-900 — dark tint instead of pale blue-100 */
+  --color-primary-dark: 30 64 175;
+  /* blue-800 — fixed, same as light mode (hero gradient) */
+  --color-primary-darker: 23 37 84;
+  /* blue-950 — fixed, same as light mode (hero gradient) */
+  --color-primary-border: 30 64 175;
+  /* blue-800 */
+  --color-primary-foreground: 15 23 42;
+  /* slate-900, for text on the brighter dark-mode primary */
 
+  /* ----------------------------------------------------------
+     SECONDARY
+  ---------------------------------------------------------- */
+  --color-secondary: 148 163 184;
+  /* slate-400 */
+  --color-secondary-hover: 203 213 225;
+  /* slate-300 */
+  --color-secondary-light: 30 41 59;
+  /* slate-800 */
+  --color-secondary-dark: 226 232 240;
+  /* slate-200 */
+  --color-secondary-foreground: 15 23 42;
+
+  /* ----------------------------------------------------------
+     ACCENT / GOLD
+  ---------------------------------------------------------- */
   --color-accent: 251 191 36;
   /* amber-400 */
   --color-accent-hover: 252 211 77;
   /* amber-300 */
   --color-accent-light: 69 46 8;
   /* dark amber tint */
+  --color-accent-dark: 252 211 77;
+  /* amber-300 */
+  --color-accent-foreground: 15 23 42;
 
+  --color-gold: 251 191 36;
+  /* amber-400 */
+  --color-gold-light: 69 46 8;
+  /* dark amber tint */
+  --color-gold-dark: 252 211 77;
+  /* amber-300 */
+
+  /* ----------------------------------------------------------
+     STATUS COLORS
+  ---------------------------------------------------------- */
   --color-success: 52 211 153;
   /* emerald-400 */
   --color-success-hover: 110 231 183;
   /* emerald-300 */
   --color-success-light: 6 46 36;
   /* dark emerald tint */
+  --color-success-dark: 110 231 183;
+  /* emerald-300 */
+  --color-success-foreground: 6 46 36;
 
   --color-danger: 248 113 113;
   /* red-400 */
@@ -119,6 +325,19 @@ html.dark {
   /* red-300 */
   --color-danger-light: 60 15 15;
   /* dark red tint */
+  --color-danger-dark: 252 165 165;
+  /* red-300 */
+  --color-danger-foreground: 60 15 15;
+
+  --color-warning: 251 191 36;
+  /* amber-400 */
+  --color-warning-hover: 252 211 77;
+  /* amber-300 */
+  --color-warning-light: 69 46 8;
+  /* dark amber tint */
+  --color-warning-dark: 252 211 77;
+  /* amber-300 */
+  --color-warning-foreground: 15 23 42;
 
   --color-info: 56 189 248;
   /* sky-400 */
@@ -126,6 +345,52 @@ html.dark {
   /* sky-300 */
   --color-info-light: 8 47 73;
   /* dark sky tint */
+  --color-info-dark: 3 105 161;
+  /* sky-700 */
+  --color-info-foreground: 255 255 255;
+
+  /* ----------------------------------------------------------
+     SIDEBAR
+     Deliberately deeper/near-black — distinct from the regular
+     slate-900 card surface — so the sidebar reads as its own
+     structural layer instead of blending into page content.
+     The active item gets a subtle navy tint (not flat gray) to
+     echo the primary "glow" used elsewhere in dark mode.
+  ---------------------------------------------------------- */
+  --color-sidebar: 11 15 25;
+  /* deep near-black, matches --color-structure-sidebar */
+  --color-sidebar-surface: 20 25 38;
+  /* slightly lifted off the sidebar background */
+  --color-sidebar-hover: 30 41 59;
+  /* slate-800 */
+  --color-sidebar-active: 30 41 78;
+  /* dark navy tint — subtle brand-colored highlight */
+  --color-sidebar-border: 51 65 85;
+  /* slate-700 */
+  --color-sidebar-text: 248 250 252;
+  /* slate-50, matches --color-text */
+  --color-sidebar-text-muted: 148 163 184;
+  /* slate-400 */
+
+  /* ----------------------------------------------------------
+     STRUCTURE — unchanged, already dark in both themes
+  ---------------------------------------------------------- */
+  --color-structure: 15 23 42;
+  /* slate-900 */
+  --color-structure-sidebar: 11 15 25;
+  /* deep near-black sidebar */
+  --color-structure-surface: 30 41 59;
+  /* slate-800 */
+  --color-structure-border: 51 65 85;
+  /* slate-700 */
+
+  /* ----------------------------------------------------------
+     INTERACTION
+  ---------------------------------------------------------- */
+  --color-focus: 59 130 246;
+  /* blue-500, matches --color-primary */
+  --color-ring: 59 130 246;
+  /* blue-500 */
 }
 
 @layer base {
@@ -185,14 +450,14 @@ html.dark {
     }
   }
 
-  /* Scrollbars */
+  /* Scrollbars — thin, rounded, and quiet until hovered */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: rgb(var(--color-surface-muted));
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -205,7 +470,8 @@ html.dark {
   }
 
   html {
-    scrollbar-color: rgb(var(--color-border)) rgb(var(--color-surface-muted));
+    scrollbar-color: rgb(var(--color-border)) transparent;
+    scrollbar-width: thin;
   }
 }
 
@@ -223,14 +489,14 @@ html.dark {
 /*
  * Legacy compatibility shim
  * -------------------------
- * ~125 of 141 components still use raw Tailwind slate/white utility
+ * A number of components still use raw Tailwind slate/white utility
  * classes instead of the semantic tokens above (bg-white, text-slate-600,
  * border-slate-200, etc.). This shim keeps those components readable in
  * dark mode by remapping the raw classes to the same CSS variables the
  * semantic tokens use. As each phase migrates a group of files to the
  * semantic classes directly (bg-surface-card, text-ink-soft, border-border),
  * its rules become redundant here and can be deleted — this block should
- * shrink to nothing by the end of the project, not grow.
+ * shrink to nothing over time, not grow.
  */
 @layer utilities {
 

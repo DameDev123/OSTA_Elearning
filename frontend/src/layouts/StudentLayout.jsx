@@ -88,13 +88,13 @@ export default function StudentLayout() {
           HEADER
       ================================================= */}
 
-      <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur lg:pl-64">
+      <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border bg-surface-elevated/95 px-4 backdrop-blur lg:pl-64">
 
         {/* MOBILE MENU */}
 
         <button
           type="button"
-          className="rounded-lg p-2 hover:bg-slate-100 lg:hidden"
+          className="rounded-lg p-2 hover:bg-surface-hover lg:hidden"
           aria-label="Open navigation"
           onClick={
             drawer.open
@@ -113,7 +113,7 @@ export default function StudentLayout() {
 
           <Link
             to="/notifications"
-            className="relative rounded-full p-2 text-slate-600 transition hover:bg-slate-50"
+            className="relative rounded-full p-2 text-ink-soft transition hover:bg-surface-hover"
             aria-label="Notifications"
           >
             <Bell size={20} />

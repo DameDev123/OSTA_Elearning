@@ -61,8 +61,11 @@ export default function InstructorLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-surface font-sans text-ink dark:bg-structure dark:text-white">
-      {/* SIDEBAR */}
+    <div className="min-h-screen bg-surface font-sans text-ink dark:bg-structure">
+
+      {/* =================================================
+          SIDEBAR
+      ================================================= */}
 
       <Sidebar
         navItems={
@@ -77,12 +80,17 @@ export default function InstructorLayout() {
         subtitle="Instructor workspace"
       />
 
-      {/* HEADER */}
+      {/* =================================================
+          HEADER
+      ================================================= */}
 
-      <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur dark:border-slate-700 dark:bg-structure/95 lg:pl-64">
+      <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-surface-elevated/95 px-4 shadow-subtle backdrop-blur dark:border-structure-border dark:bg-structure-surface/95 lg:pl-64">
+
+        {/* MOBILE MENU */}
+
         <button
           type="button"
-          className="rounded-lg p-2 hover:bg-slate-50 dark:text-white dark:hover:bg-slate-700 lg:hidden"
+          className="rounded-lg p-2 text-ink-soft transition hover:bg-surface-hover hover:text-ink dark:hover:bg-structure-border lg:hidden"
           aria-label="Open navigation"
           onClick={
             drawer.open
@@ -91,20 +99,29 @@ export default function InstructorLayout() {
           <Menu size={20} />
         </button>
 
+        {/* DESKTOP SPACER */}
+
         <div className="hidden lg:block" />
 
-        <div className="flex items-center gap-3"><ThemeToggle /><LanguageSwitcher />
+        {/* =================================================
+            HEADER ACTIONS
+        ================================================= */}
+
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <LanguageSwitcher />
+
           {/* NOTIFICATIONS */}
 
           <Link
             to="/notifications"
-            className="relative rounded-full p-2 text-slate-600 transition hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700"
+            className="relative rounded-full p-2 text-ink-soft transition hover:bg-surface-hover hover:text-ink dark:hover:bg-structure-border"
             aria-label="Notifications"
           >
             <Bell size={20} />
 
             {unreadCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold text-danger-foreground ring-2 ring-surface-elevated dark:ring-structure-surface">
                 {unreadCount}
               </span>
             )}
@@ -115,14 +132,16 @@ export default function InstructorLayout() {
           <Link
             to="/profile"
             aria-label="Your profile"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-xs font-black uppercase text-primary transition hover:ring-2 hover:ring-primary/20 dark:bg-primary/20 dark:text-white dark:hover:ring-primary/30"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-xs font-black uppercase text-primary transition hover:ring-2 hover:ring-primary/30"
           >
             {getInitial()}
           </Link>
         </div>
       </header>
 
-      {/* CONTENT */}
+      {/* =================================================
+          CONTENT
+      ================================================= */}
 
       <main className="pb-8 lg:pl-64">
         <div className="mx-auto max-w-6xl px-4 py-6">
